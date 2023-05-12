@@ -9,31 +9,13 @@ namespace Module8
         {
             try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo("C:\\");
-                if (dirInfo.Exists)
-                {
-                    Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
-                }
-                DirectoryInfo newDirectory = new DirectoryInfo(@"newDirectory");
-                if (!newDirectory.Exists)
-                {
-                    newDirectory.Create();
-                }
-                Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
+                DirectoryInfo dirInfo = new DirectoryInfo(@"C:\Users\bogda\OneDrive\Рабочий стол");
+                string trashPath = "C:\\$RECYCLE.BIN";
+                dirInfo.MoveTo(trashPath);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }
-            try
-            {
-                DirectoryInfo dirInfo = new DirectoryInfo(@"newDirectory");
-                dirInfo.Delete(true);
-                Console.WriteLine("Каталог удалён");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
     }
