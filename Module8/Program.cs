@@ -1,21 +1,23 @@
 ﻿using System;
 using System.IO;
 
-namespace Module8
+class Task2
 {
-    internal class Program
+    public static void Main()
     {
-        public static void Main(string[] args)
+        var fileInfo = new FileInfo("C:\\Users\\bogda\\OneDrive\\Рабочий стол\\C#\\sr.txt");
+
+        using (StreamWriter sw = fileInfo.AppendText())
         {
-            string filePath = @"C:\Users\bogda\OneDrive\Рабочий стол\C#";
-            using (StreamReader sr = File.OpenText(filePath))
-            {
-                string str = " ";
-                while ((str = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(str);
-                }
-            }
+            sw.WriteLine($"// Время запуска: {DateTime.Now}");
+        }
+
+        using (StreamReader sr = fileInfo.OpenText())
+        {
+            string str = "";
+            while ((str = sr.ReadLine()) != null)
+                Console.WriteLine(str);
+
         }
     }
 }
