@@ -25,6 +25,16 @@ namespace Module8
             {
                 Console.WriteLine(e.Message);
             }
+            try
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(@"newDirectory");
+                dirInfo.Delete(true);
+                Console.WriteLine("Каталог удалён");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
