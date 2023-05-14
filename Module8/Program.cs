@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Timers;
+using static System.Net.WebRequestMethods;
 
 namespace DirectoryManager
 {
@@ -27,9 +28,15 @@ namespace DirectoryManager
             try
             {
                 DirectoryInfo dirInfo = new DirectoryInfo("C:\\Users\\bogda\\OneDrive\\Рабочий стол\\C#\\000");
-                var timer = new Timer{ Interval = 30000 };
-                timer.Tick += (sender, args) => dirInfo.Delete(true);
-                Console.WriteLine("Удалено");
+                foreach (FileInfo fi in dirInfo.GetFiles())
+                {
+                    var creationTime = fi.CreationTime;
+
+                    if (creationTime < (DateTime.Now - new TimeSpan(0, 0, 30, 0)))
+                    {
+                        fi.Delete();
+                    }
+                }
             }
             catch (Exception ex)
             {
