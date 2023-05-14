@@ -1,23 +1,23 @@
 ﻿using System;
 using System.IO;
-
-class Task2
+namespace ReadMyFile
 {
-    public static void Main()
+    class Program
     {
-        var fileInfo = new FileInfo("C:\\Users\\bogda\\OneDrive\\Рабочий стол\\C#\\sr.txt");
-
-        using (StreamWriter sw = fileInfo.AppendText())
+        public static void Main()
         {
-            sw.WriteLine($"// Время запуска: {DateTime.Now}");
-        }
+            string filePath = "C:\\Users\\bogda\\OneDrive\\Рабочий стол\\BinaryFile.bin";
 
-        using (StreamReader sr = fileInfo.OpenText())
-        {
-            string str = "";
-            while ((str = sr.ReadLine()) != null)
-                Console.WriteLine(str);
-
+            if (File.Exists(filePath))
+            {
+                string stringValue;
+                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                {
+                    stringValue = reader.ReadString();
+                }
+                Console.WriteLine("Из файла считано:");
+                Console.WriteLine(stringValue);
+            }
         }
     }
 }
