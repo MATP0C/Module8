@@ -1,22 +1,39 @@
 ﻿using System;
 using System.IO;
-namespace ReadMyFile
+using System.Threading;
+using System.Timers;
+
+namespace DirectoryManager
 {
     class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
-            string filePath = "C:\\Users\\bogda\\OneDrive\\Рабочий стол\\BinaryFile.bin";
-
-            if (File.Exists(filePath))
+            try
             {
-                string stringValue;
-                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                DirectoryInfo dirInfo = new DirectoryInfo("C:\\Users\\bogda\\OneDrive\\Рабочий стол\\C#\\000");
+                if (dirInfo.Exists)
                 {
-                    stringValue = reader.ReadString();
+                    Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
                 }
-                Console.WriteLine("Из файла считано:");
-                Console.WriteLine(stringValue);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        private void DeleteFile(string path) 
+        {
+            try
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo("C:\\Users\\bogda\\OneDrive\\Рабочий стол\\C#\\000");
+                var timer = new Timer{ Interval = 30000 };
+                timer.Tick += (sender, args) => dirInfo.Delete(true);
+                Console.WriteLine("Удалено");
+            }
+            catch (Exception ex)
+            {
+                    Console.WriteLine(ex.Message);
             }
         }
     }
