@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.IO;
-namespace TestApplicationForStudy
+
+namespace Task2
 {
     class Program
     {

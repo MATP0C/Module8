@@ -4,7 +4,7 @@ using System.Threading;
 using System.Timers;
 using static System.Net.WebRequestMethods;
 
-namespace DirectoryManager
+namespace Task1
 {
     class Program
     {
